@@ -1,7 +1,14 @@
-function setup() {
+var grid;
 
+function setup() 
+{
+  createCanvas(400, 400);
+  grid = new grid();
 }
 
-function draw() {
+function draw() 
+{
+  background(204);
+  grid.show();
   
 }
