@@ -9,6 +9,7 @@ function menu()
     textAlign(CENTER);
     textSize(32);
     textFont("Verdana");
+    fill(51);
     
     text("Tic Tac Toe", centerx, centery-100);
     
