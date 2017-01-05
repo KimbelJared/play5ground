@@ -12,7 +12,13 @@ function cursorq()
     ellipse(mouseX, mouseY, this.size);
     pop();
   }
-  
+  this.drawq = function()
+  {
+    push();
+    ellipse(this.clickX, this.clickY, this.size);
+    pop();
+    
+  }
   
   
 }

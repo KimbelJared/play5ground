@@ -17,4 +17,16 @@ function menu()
     
     pop();
   }
+  this.check = function()
+  {
+    d = int(dist(centerx, centery-25, cursorq.clickX, cursorq.clickY));
+    if (d < 32)
+    {
+      print("work");
+      cursorq.clickX = 0;
+      cursorq.clickY = 0;
+      pointingame = 1;
+    }
+  }      
+
 }
