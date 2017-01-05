@@ -19,6 +19,7 @@ function draw()
   background(204);
   cursorq.show();
   cursorq.drawq();
+  menu.back();
   
   if(pointingame == 0)
   {
