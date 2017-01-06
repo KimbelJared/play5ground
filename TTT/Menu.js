@@ -28,15 +28,5 @@ function menu()
       pointingame = 1;
     }
   }      
-  this.back = function()
-  {
-    push();
-    textAlign(CENTER);
-    textSize(20);
-    textFont("Verdana");
-    fill(51); 
-    
-    text("Back", width/8, height - 48); 
-    pop();  
-  }
+  
 }
