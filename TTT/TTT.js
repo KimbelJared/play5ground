@@ -1,6 +1,7 @@
 var grid;
 var menu;
 var back;
+var next;
 var cursorq;
 var p1;
 var p2;
@@ -14,30 +15,36 @@ function setup()
   menu = new menu();
   cursorq = new cursorq();
   back = new back();
-  p1 = new player1;
-  p2 = new player2;
+  p1 = new playerOne;
+  p2 = new playerTwo;
+  next = new next;
 }
 
 function draw() 
 {
   background(204);
+  
   cursorq.show();
   cursorq.drawq();
+  
   back.show();
   back.check();
   
-  if(pointingame == 0)
+  next.show();
+  next.check();
+  
+  if (pointingame == 0)
   {
     menu.show();
     menu.check();
   }
-  else if (pointingame == 1)
+  if (pointingame == 1)
   {
-      
+    p1.show();
   }
   else if (pointingame == 2)
   {
-    
+    p2.show();
   }  
   else if (pointingame == 3)
   {
@@ -50,5 +57,18 @@ function mouseClicked()
 {
   cursorq.clickX = mouseX;
   cursorq.clickY = mouseY;
+  return false;
+}
+
+function keyTyped() 
+{
+  if (pointingame == 1) 
+  {
+    p1.typed(key);
+  } 
+  if (pointingame == 2) 
+  {
+    p2.typed(key);
+  } 
   return false;
 }

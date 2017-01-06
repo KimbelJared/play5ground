@@ -1,6 +1,6 @@
-function back()
+function next()
 {
-  this.x = width/8;
+  this.x = width - 50;
   this.y = height - 48;
   this.show = function()
   {
@@ -12,7 +12,7 @@ function back()
       textFont("Verdana");
       fill(51); 
     
-      text("Back", this.x, this.y); 
+      text("Next", this.x, this.y); 
       pop();
     }
   }
@@ -24,7 +24,7 @@ function back()
       print("work");
       cursorq.clickX = 0;
       cursorq.clickY = 0;
-      pointingame--;
+      pointingame++;
     }
   } 
   
