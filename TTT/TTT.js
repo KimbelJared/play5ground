@@ -14,9 +14,9 @@ function setup()
   grid = new grid();
   menu = new menu();
   cursorq = new cursorq();
-  back = new back();
   p1 = new playerOne;
   p2 = new playerTwo;
+  back = new back();
   next = new next;
 }
 

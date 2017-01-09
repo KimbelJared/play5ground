@@ -2,6 +2,7 @@ function back()
 {
   this.x = width/8;
   this.y = height - 48;
+  this.showing = true;
   this.show = function()
   {
     if(pointingame != 3 || pointingame != 0)
@@ -27,7 +28,10 @@ function back()
       pointingame--;
     }
   } 
-  
+  this.display = function(input)
+  {
+    
+  }
   
   
 }
