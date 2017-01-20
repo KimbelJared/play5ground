@@ -25,13 +25,9 @@ function draw()
   background(204);
   
   cursorq.show();
-  cursorq.drawq();
+  //cursorq.drawq();
   
-  back.show();
-  back.check();
-  
-  next.show();
-  next.check();
+
   
   if (pointingame == 0)
   {
@@ -41,14 +37,30 @@ function draw()
   if (pointingame == 1)
   {
     p1.show();
+    back.show();
+    next.show();
+    
+    back.check();
+    next.check();
   }
   else if (pointingame == 2)
   {
     p2.show();
+    back.show();
+    next.show();
+    
+    back.check();
+    next.check();
   }  
   else if (pointingame == 3)
   {
     grid.show();
+    p1.dis();
+  }
+  else if (pointingame == 4)
+  {
+    grid.show();
+    p2.dis();
   }
   
 }
@@ -57,6 +69,16 @@ function mouseClicked()
 {
   cursorq.clickX = mouseX;
   cursorq.clickY = mouseY;
+  if (pointingame == 3)
+  {
+    //p1.turn();
+  }
+  else if (pointingame == 4)
+  {
+    //p2.turn();
+  }
+  
+  
   return false;
 }
 
