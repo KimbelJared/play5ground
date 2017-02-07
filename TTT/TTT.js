@@ -25,7 +25,6 @@ function draw()
   background(204);
   
   cursorq.show();
-  //cursorq.drawq();
   
 
   
@@ -34,7 +33,7 @@ function draw()
     menu.show();
     menu.check();
   }
-  if (pointingame == 1)
+  else if (pointingame == 1)
   {
     p1.show();
     back.show();
@@ -69,13 +68,14 @@ function mouseClicked()
 {
   cursorq.clickX = mouseX;
   cursorq.clickY = mouseY;
+  
   if (pointingame == 3)
   {
-    //p1.turn();
+    p1.turn(x, y);
   }
   else if (pointingame == 4)
   {
-    //p2.turn();
+    p2.turn();
   }
   
   
