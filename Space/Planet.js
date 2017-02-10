@@ -7,7 +7,7 @@ function Planet()
   this.r = random(0, 255);
   this.g = random(0, 255);
   this.b = random(0, 255);
-  
+  this.size = random(64, 255);
   this.update = function()
   {
     this.z = this.z - speed;
@@ -28,7 +28,7 @@ function Planet()
     var sx = map(this.x / this.z, 0, 1, 0, width);
     var sy = map(this.y / this.z, 0, 1, 0, height);
 
-    var r = map(this.z, 0, width, 128, 0);
+    var r = map(this.z, 0, width, this.size, 0);
     ellipse(sx, sy, r, r);
 
     var px = map(this.x / this.pz, 0, 1, 0, width);

@@ -1,12 +1,19 @@
 var stars = []
 
-var speed;
+var speed = 10, speedTest = 10;
 
 var planets = []
- 
+
+var sun;
+
+var move, move2;
+
+var pointX, pointY;
+
 function setup() 
 {
-  createCanvas(1600, 900);
+  noCursor();
+  createCanvas(displayWidth, displayHeight);
   for (var i = 0; i < 800; i++) 
   {
     stars[i] = new Star();
@@ -15,13 +22,18 @@ function setup()
   {
     planets[i] = new Planet();
   }
+  sun = new Sun;
+  
 }
 
 function draw() 
 {
-  speed = map(mouseX, 0, width, 0, 50);
   background(0);
-  translate(width / 2, height / 2);
+  
+  pointX = mouseX/2;
+  pointY = mouseY/2;
+  
+  translate(pointX , pointY);
   
   for (var i = 0; i < stars.length; i++) 
   {
@@ -31,8 +43,35 @@ function draw()
   for (var i = 0; i < planets.length; i++) 
   {
     planets[i].update();
-    planets[i].show();
+    planets[i].show();  
+  }
+  
+  //sun.show();
+  
+}
+
+function windowResized() 
+{
+  resizeCanvas(windowWidth, windowHeight);
+}
+
+function mouseWheel(event) 
+{
+  if (-event.delta > 0)
+  {
+    if (speed != 50)
+    {
+      speed += 5;  
+    }
     
   }
+  else
+  {
+    if (speed != 0)
+    {
+      speed -= 5;  
+    }
+  }
+  return false;
   
 }

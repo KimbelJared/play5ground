@@ -4,7 +4,11 @@ function Star()
   this.y = random(-height, height);
   this.z = random(width);
   this.pz = this.z;
-
+  
+  this.r = random(0, 255);
+  this.g = random(0, 255);
+  this.b = random(0, 255);
+  
   this.update = function()
   {
     this.z = this.z - speed;
@@ -20,6 +24,7 @@ function Star()
   this.show = function() 
   {
     fill(255);
+    //fill(this.r, this.g, this.b);
     noStroke();
 
     var sx = map(this.x / this.z, 0, 1, 0, width);
