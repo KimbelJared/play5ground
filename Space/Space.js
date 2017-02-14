@@ -29,11 +29,8 @@ function setup()
 function draw() 
 {
   background(0);
-  
-  pointX = mouseX/2;
-  pointY = mouseY/2;
-  
-  translate(pointX , pointY);
+
+  translate(mouseX , mouseY);
   
   for (var i = 0; i < stars.length; i++) 
   {
