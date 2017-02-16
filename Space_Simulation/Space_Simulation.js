@@ -2,6 +2,8 @@ var stars = []
 var speed = 10;
 var images = []
 
+var distTxt;
+
 function preload() 
 {
   imageMode(CENTER);
@@ -17,6 +19,9 @@ function preload()
   images[2] = loadImage("assets/uranus.png");
   images[1] = loadImage("assets/neptune.png");
   images[0] = loadImage("assets/pluto.png");
+  
+  fontRegular = loadFont("assets/fontReg.ttf");
+  fontBold = loadFont("assets/fontBold.ttf");
 }
 
 function setup() 
@@ -27,6 +32,7 @@ function setup()
   {
     stars[i] = new Star();
   }
+  distTxt = new Distance();
 }
 
 function draw() 
@@ -35,10 +41,10 @@ function draw()
   
   translate(mouseX , mouseY);
   
-  for (var i = 0; i < images.length; i++) 
-  {
-    image(images[i], 0, 0, images[0].width/4, images[0].height/4);
-  }
+  //for (var i = 0; i < images.length; i++) 
+  //{
+  //  image(images[i], 0, 0, images[0].width/4, images[0].height/4);
+  //}
   
   
   for (var i = 0; i < stars.length; i++) 
@@ -46,6 +52,9 @@ function draw()
     stars[i].update();
     stars[i].show();
   }
+  
+  distTxt.show();
+  distTxt.update();
 }
 
 function windowResized() 
