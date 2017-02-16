@@ -3,7 +3,7 @@ var speed = 10;
 var images = []
 
 var distTxt;
-
+var speedCheckbox, speedCheckboxVal = true;
 function preload() 
 {
   imageMode(CENTER);
@@ -28,16 +28,22 @@ function setup()
 {
   noCursor();
   createCanvas(displayWidth, displayHeight);
+  
   for (var i = 0; i < 800; i++) 
   {
     stars[i] = new Star();
   }
+  
   distTxt = new Distance();
+  
+  speedCheckbox = createCheckbox('Speed', true);
+  speedCheckbox.changed(speedCheckEvent);
 }
 
 function draw() 
 {
   background(0);
+  speedCheckbox.position(10, 10);
   
   translate(mouseX , mouseY);
   
@@ -60,6 +66,19 @@ function draw()
 function windowResized() 
 {
   resizeCanvas(windowWidth, windowHeight);
+}
+
+function speedCheckEvent()
+{
+  if (this.checked()) 
+  {
+    speedCheckboxVal = true;
+  } 
+  else 
+  {
+    speedCheckboxVal = false;
+  }
+  
 }
 
 function mouseWheel(event) 

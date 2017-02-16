@@ -14,15 +14,28 @@ function Distance()
   {
     this.distance -= speed * 10000;
     var temp = this.distance.toString();
+    this.txtToDisp = "";
     
-    for (var i = temp.length; i > 0; i--)
+    for (var i = 0; i < 10; i++)
     {
-      print(temp[i]);
+      this.txtToDisp += temp[i];
+      if(i == 9)
+      {
+        
+      }
+      else if(i % 3 == 0)
+      {
+        this.txtToDisp += ",";
+      }
     }
+    this.txtToDisp += " mi";
   }
 
   this.show = function() 
   {
-    text(this.distance, 100, -15);
+    if(speedCheckboxVal)
+    {
+      text(this.txtToDisp, 100, -15);
+    }
   }
 }
