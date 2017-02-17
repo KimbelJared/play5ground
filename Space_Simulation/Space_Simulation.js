@@ -2,8 +2,10 @@ var stars = []
 var speed = 10;
 var images = []
 
-var distTxt;
+var distTxt, cursor;
 var speedCheckbox, speedCheckboxVal = true;
+var cursorCheckbox, cursorCheckboxVal = false;
+
 function preload() 
 {
   imageMode(CENTER);
@@ -35,21 +37,26 @@ function setup()
   }
   
   distTxt = new Distance();
+  cursor = new Cursor();
   
   speedCheckbox = createCheckbox('Speed', true);
   speedCheckbox.changed(speedCheckEvent);
+  
+  cursorCheckbox = createCheckbox('Cursor', false);
+  cursorCheckbox.changed(cursorCheckEvent);
 }
 
 function draw() 
 {
   background(0);
   speedCheckbox.position(10, 10);
+  cursorCheckbox.position(10, 30);
   
   translate(mouseX , mouseY);
   
   //for (var i = 0; i < images.length; i++) 
   //{
-  //  image(images[i], 0, 0, images[0].width/4, images[0].height/4);
+  // image(images[i], 0, 0, images[0].width/4, images[0].height/4);
   //}
   
   
@@ -61,6 +68,11 @@ function draw()
   
   distTxt.show();
   distTxt.update();
+  
+  if(cursorCheckboxVal)
+  {
+    cursor.show();
+  }
 }
 
 function windowResized() 
@@ -79,6 +91,17 @@ function speedCheckEvent()
     speedCheckboxVal = false;
   }
   
+}
+function cursorCheckEvent()
+{
+  if (this.checked()) 
+  {
+    cursorCheckboxVal = true;
+  } 
+  else 
+  {
+    cursorCheckboxVal = false;
+  }
 }
 
 function mouseWheel(event) 
