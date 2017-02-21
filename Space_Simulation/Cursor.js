@@ -4,13 +4,16 @@ function Cursor()
   
   this.show = function() 
   {
-    push();
+    if(showMenu || cursorCheckboxVal)
+    {
+      push();
     
-    noStroke();
-    fill(36, 149, 188);
-    ellipse(0, 0, this.size, this.size);
+      noStroke();
+      fill(36, 149, 188);
+      ellipse(0, 0, this.size, this.size);
     
-    pop();
+      pop();
+    }
   }
    
 }
