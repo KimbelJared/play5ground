@@ -1,4 +1,4 @@
-function Star() 
+function Hearts() 
 {
   this.update = function()
   {

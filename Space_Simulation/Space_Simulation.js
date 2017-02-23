@@ -73,8 +73,8 @@ function draw()
   
   for (var i = 0; i < stars.length; i++) 
   {
-    //stars[i].update();
-    //stars[i].show();
+    stars[i].update();
+    stars[i].show();
   }
   
   distTxt.show();
@@ -114,16 +114,25 @@ function cursorCheckEvent()
 
 function mouseClicked() 
 {
+  /*
+  cursorDot.clickedX = mouseX;
+  cursorDot.clickedY = mouseY;
+  
   if (showMenu) 
   {
-    showMenu = false;
-    
-    menu.hide();
+    cursorDot.test();
+    if(!cursorDot.inMenu)
+    {
+      showMenu = false;
+      menu.hide();
+    }
   } 
-  else 
+  
+  else if (!showMenu)
   {
     showMenu = true;
   }
+  */
   return false;
 }
 
