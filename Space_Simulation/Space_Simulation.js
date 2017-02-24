@@ -11,6 +11,7 @@ var menu, showMenu = false;
 
 var speedCheckbox, speedCheckboxVal = true;
 var cursorCheckbox, cursorCheckboxVal = false;
+var trailLineCheckbox, trailLinesCheckboxVal = true;
 
 function preload() 
 {
@@ -52,6 +53,9 @@ function setup()
   cursorCheckbox = createCheckbox('Cursor', false);
   cursorCheckbox.changed(cursorCheckEvent);
   
+  trailLineCheckbox = createCheckbox('Trail Lines', true);
+  trailLineCheckbox.changed(trailLineCheckEvent);
+  
   menu.init();
 }
 
@@ -67,7 +71,7 @@ function draw()
   
   for (var i = 0; i < images.length; i++) 
   {
-   //image(images[i], i*100, 0, images[0].width/4, images[0].height/4);
+   image(images[i], i*100, 0, images[0].width/4, images[0].height/4);
   }
   
   
@@ -112,9 +116,21 @@ function cursorCheckEvent()
   }
 }
 
+function trailLineCheckEvent()
+{
+  if (this.checked()) 
+  {
+    trailLinesCheckboxVal = true;
+  } 
+  else 
+  {
+    trailLinesCheckboxVal = false;
+  }
+}
+
 function mouseClicked() 
 {
-  /*
+  
   cursorDot.clickedX = mouseX;
   cursorDot.clickedY = mouseY;
   
@@ -132,22 +148,22 @@ function mouseClicked()
   {
     showMenu = true;
   }
-  */
-  return false;
+  
+  //return false;
 }
 
 function mouseWheel(event) 
 {
   if (-event.delta > 0)
   {
-    if (speed != 50)
+    if (!(speed >= 50))
     {
       speed += 5;  
     }    
   }
   else
   {
-    if (speed != 0)
+    if (!(speed <= -50))
     {
       speed -= 5;  
     }

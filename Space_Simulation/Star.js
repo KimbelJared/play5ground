@@ -15,6 +15,13 @@ function Star()
       this.y = random(-height, height);
       this.pz = this.z;
     }
+    if (this.z > width)
+    {
+      this.z = random(-10, 0);
+      this.x = random(-width, width);
+      this.y = random(-height, height);
+      //this.pz = this.z;
+    }
   }
 
   this.show = function() 
@@ -32,8 +39,19 @@ function Star()
     var py = map(this.y / this.pz, 0, 1, 0, height);
 
     this.pz = this.z;
-
-    stroke(255);
-    line(px, py, sx, sy);
+    
+    if(trailLinesCheckboxVal)
+    {
+      if(speed > 0)
+      {
+        stroke(255);
+        line(px, py, sx, sy);
+      }
+      if(speed < 0)
+      {
+        stroke(255);
+        //line(this.x, this.y, this.x-this.z, this.y-this.z);
+      }
+    }
   }
 }
