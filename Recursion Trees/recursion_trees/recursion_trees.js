@@ -1,13 +1,13 @@
 var angle = 0;
 var slider;
 
-function setup() 
+function setup()
 {
   createCanvas(800, 800);
   slider = createSlider(0, TWO_PI, PI / 4, 0.01);
 }
 
-function draw() 
+function draw()
 {
   background(51);
   angle = slider.value();
@@ -16,19 +16,22 @@ function draw()
   branch(100);
 }
 
-function branch(len) 
+function branch(len)
 {
   line(0, 0, 0, -len);
   translate(0, -len);
+
   if (len > 4)
   {
     push();
+
     rotate(angle);
     branch(len * 0.67);
     pop();
     push();
     rotate(-angle);
     branch(len * 0.67);
+
     pop();
   }
 
