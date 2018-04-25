@@ -4,7 +4,7 @@ function Voter(x, y)
   this.y = y;
   this.val;
   this.party;
-  this.colour = random(0,255);
+  this.colour = returnColor();
   
   this.show = function()
   {
@@ -19,4 +19,10 @@ function Voter(x, y)
     this.toDelete = false;
   }
   
+}
+
+function returnColor()
+{
+  var c = ["#000000", "#ffffff"];
+  return random(c);
 }
