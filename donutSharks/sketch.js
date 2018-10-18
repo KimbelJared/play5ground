@@ -1,23 +1,18 @@
-var shark;
 var donuts = [];
 
 function setup()
 {
-  createCanvas(800, 800);
-
-  shark = new Shark();
+  createCanvas(400, 400);
 
   for(var i = 0; i < 10; i++)
   {
-    donuts[i] = new Donut(400+(i*25),400)
+    donuts[i] = new Donut(25+(i*30),200, 25)
   }
 }
 
 function draw()
 {
   background(51);
-
-  shark.show();
 
   for(var i = 0; i < 10; i++)
   {
