@@ -13,13 +13,13 @@ var speedCheckbox, speedCheckboxVal = true;
 var cursorCheckbox, cursorCheckboxVal = false;
 var trailLineCheckbox, trailLinesCheckboxVal = true;
 
-function preload() 
+function preload()
 {
   imageMode(CENTER);
-  
+
   images[10] = loadImage("assets/sun.png");
   images[9] = loadImage("assets/mercury.png");
-  images[8] = loadImage("assets/venus.png"); 
+  images[8] = loadImage("assets/venus.png");
   images[7] = loadImage("assets/earth.png");
   images[6] = loadImage("assets/moon.png");
   images[5] = loadImage("assets/mars.png");
@@ -28,89 +28,89 @@ function preload()
   images[2] = loadImage("assets/uranus.png");
   images[1] = loadImage("assets/neptune.png");
   images[0] = loadImage("assets/pluto.png");
-  
+
   fontRegular = loadFont("assets/fontReg.ttf");
   fontBold = loadFont("assets/fontBold.ttf");
 }
 
-function setup() 
+function setup()
 {
   noCursor();
   createCanvas(displayWidth, displayHeight);
-  
-  for (var i = 0; i < 800; i++) 
+
+  for (var i = 0; i < 800; i++)
   {
     stars[i] = new Star();
   }
-  
+
   distTxt = new Distance();
   cursorDot = new Cursor();
   menu = new Menu();
-  
+
   speedCheckbox = createCheckbox('Speed', true);
   speedCheckbox.changed(speedCheckEvent);
-  
+
   cursorCheckbox = createCheckbox('Cursor', false);
   cursorCheckbox.changed(cursorCheckEvent);
-  
+
   trailLineCheckbox = createCheckbox('Trail Lines', true);
   trailLineCheckbox.changed(trailLineCheckEvent);
-  
+
   menu.init();
 }
 
-function draw() 
+function draw()
 {
   background(0);
-  
+
   menu.show();
-  
+
   translate(mouseX , mouseY);
-  
-  
-  
-  for (var i = 0; i < images.length; i++) 
+
+
+
+  for (var i = 0; i < images.length; i++)
   {
    image(images[i], i*100, 0, images[0].width/4, images[0].height/4);
   }
-  
-  
-  for (var i = 0; i < stars.length; i++) 
+
+
+  for (var i = 0; i < stars.length; i++)
   {
     stars[i].update();
     stars[i].show();
   }
-  
+
   distTxt.show();
   distTxt.update();
-   
+
   cursorDot.show();
 }
 
-function windowResized() 
+function windowResized()
 {
   resizeCanvas(windowWidth, windowHeight);
 }
 
 function speedCheckEvent()
 {
-  if (this.checked()) 
+  if (this.checked())
   {
     speedCheckboxVal = true;
-  } 
-  else 
+  }
+  else
   {
     speedCheckboxVal = false;
   }
-  
+
 }
 function cursorCheckEvent()
 {
-  if (this.checked()) 
+  if (this.checked())
   {
     cursorCheckboxVal = true;
-  } 
-  else 
+  }
+  else
   {
     cursorCheckboxVal = false;
   }
@@ -118,23 +118,23 @@ function cursorCheckEvent()
 
 function trailLineCheckEvent()
 {
-  if (this.checked()) 
+  if (this.checked())
   {
     trailLinesCheckboxVal = true;
-  } 
-  else 
+  }
+  else
   {
     trailLinesCheckboxVal = false;
   }
 }
 
-function mouseClicked() 
+function mouseClicked()
 {
-  
+
   cursorDot.clickedX = mouseX;
   cursorDot.clickedY = mouseY;
-  
-  if (showMenu) 
+
+  if (showMenu)
   {
     cursorDot.test();
     if(!cursorDot.inMenu)
@@ -142,31 +142,31 @@ function mouseClicked()
       showMenu = false;
       menu.hide();
     }
-  } 
-  
+  }
+
   else if (!showMenu)
   {
     showMenu = true;
   }
-  
+
   //return false;
 }
 
-function mouseWheel(event) 
+function mouseWheel(event)
 {
   if (-event.delta > 0)
   {
     if (!(speed >= 50))
     {
-      speed += 5;  
-    }    
+      speed += 5;
+    }
   }
   else
   {
     if (!(speed <= -50))
     {
-      speed -= 5;  
+      speed -= 5;
     }
   }
-  return false;  
+  return false;
 }
