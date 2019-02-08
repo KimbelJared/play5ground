@@ -65,7 +65,8 @@ function draw()
 
   menu.show();
 
-  translate(mouseX , mouseY);
+
+  cursorDot.translateScreen();
 
 
 
@@ -81,8 +82,9 @@ function draw()
     stars[i].show();
   }
 
-  distTxt.show();
+
   distTxt.update();
+  distTxt.show();
 
   cursorDot.show();
 }
@@ -141,12 +143,14 @@ function mouseClicked()
     {
       showMenu = false;
       menu.hide();
+      menu.reStore();
     }
   }
 
   else if (!showMenu)
   {
     showMenu = true;
+    menu.store();
   }
 
   //return false;
@@ -154,19 +158,22 @@ function mouseClicked()
 
 function mouseWheel(event)
 {
-  if (-event.delta > 0)
+  if(!showMenu)
   {
-    if (!(speed >= 50))
+    if (-event.delta > 0)
     {
-      speed += 5;
+      if (!(speed >= 50))
+      {
+        speed += 5;
+      }
     }
-  }
-  else
-  {
-    if (!(speed <= -50))
+    else
     {
-      speed -= 5;
+      if (!(speed <= -50))
+      {
+        speed -= 5;
+      }
     }
+    return false;
   }
-  return false;
 }

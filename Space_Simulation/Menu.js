@@ -5,10 +5,23 @@ function Menu()
   this.x = (width/2)-(this.w/2);
   this.y = (height/2)-(this.h/2);
 
+  var tempSpeed = 0;
+
+  this.store = function()
+  {
+    tempSpeed = speed;
+    speed = 0;
+  }
+
+  this.reStore = function()
+  {
+    speed = tempSpeed;
+  }
   this.show = function()
   {
     if(showMenu)
     {
+      //Store speed
 
       //Menu Box
       push();
