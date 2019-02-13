@@ -16,7 +16,7 @@ var trailLineCheckbox, trailLinesCheckboxVal = true;
 function preload()
 {
   imageMode(CENTER);
-
+  /*
   images[10] = loadImage("assets/sun.png");
   images[9] = loadImage("assets/mercury.png");
   images[8] = loadImage("assets/venus.png");
@@ -31,11 +31,12 @@ function preload()
 
   fontRegular = loadFont("assets/fontReg.ttf");
   fontBold = loadFont("assets/fontBold.ttf");
+  */
 }
 
 function setup()
 {
-  noCursor();
+  //noCursor();
   createCanvas(displayWidth, displayHeight);
 
   for (var i = 0; i < 800; i++)
@@ -43,7 +44,7 @@ function setup()
     stars[i] = new Star();
   }
 
-  distTxt = new Distance();
+  //distTxt = new Distance();
   cursorDot = new Cursor();
   menu = new Menu();
 
@@ -68,13 +69,12 @@ function draw()
 
   cursorDot.translateScreen();
 
-
-
+  /*
   for (var i = 0; i < images.length; i++)
   {
    image(images[i], i*100, 0, images[0].width/4, images[0].height/4);
   }
-
+  */
 
   for (var i = 0; i < stars.length; i++)
   {
@@ -82,9 +82,10 @@ function draw()
     stars[i].show();
   }
 
-
+  /*
   distTxt.update();
   distTxt.show();
+  */
 
   cursorDot.show();
 }
@@ -150,10 +151,8 @@ function mouseClicked()
   else if (!showMenu)
   {
     showMenu = true;
-    menu.store();
+    menu.store();    
   }
-
-  //return false;
 }
 
 function mouseWheel(event)

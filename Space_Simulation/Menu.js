@@ -17,6 +17,7 @@ function Menu()
   {
     speed = tempSpeed;
   }
+
   this.show = function()
   {
     if(showMenu)

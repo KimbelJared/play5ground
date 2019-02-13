@@ -14,7 +14,15 @@ function Cursor()
       noStroke();
       fill(36, 149, 188);
       //CURRENT PROBLEM
-      ellipse(mouseX, mouseY, this.size, this.size);
+      if(showMenu)
+      {
+        ellipse(mouseX - this.clickedX, mouseY - this.clickedY, this.size, this.size);
+      }
+      else if (!showMenu)
+      {
+        translate(0,0)
+        ellipse(mouseX, mouseY, this.size, this.size);
+      }
 
       pop();
     }
@@ -45,6 +53,11 @@ function Cursor()
     }
   }
 
+  this.reset = function()
+  {
+    this.clickedX = 0;
+    this.clickedY = 0;
+  }
   this.translateScreen = function()
   {
     if(!showMenu)
