@@ -13,15 +13,13 @@ function Cursor()
 
       noStroke();
       fill(36, 149, 188);
-      //CURRENT PROBLEM
       if(showMenu)
       {
         ellipse(mouseX - this.clickedX, mouseY - this.clickedY, this.size, this.size);
       }
       else if (!showMenu)
       {
-        translate(0,0)
-        ellipse(mouseX, mouseY, this.size, this.size);
+        ellipse(0, 0, this.size, this.size);
       }
 
       pop();

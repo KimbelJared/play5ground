@@ -1,0 +1,6 @@
+//Fix cursor dot location
+
+
+Program each planets location
+More menu functionality
+clicking in menu not change translation of screen
