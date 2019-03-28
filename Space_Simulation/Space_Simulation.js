@@ -49,7 +49,7 @@ function setup()
 
   for (var i = planetsData.length; i > 0; i--)
   {
-    planets[i] = new planets(planetsData[i]);
+    planets[i] = new Planet(planetsData[i]);
   }
 
   distTxt = new Distance();
