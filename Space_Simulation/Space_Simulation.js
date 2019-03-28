@@ -1,6 +1,7 @@
 var stars = []
 var images = []
-
+var planetsData = []
+var planets = []
 var speed = 10;
 
 
@@ -31,7 +32,9 @@ function preload()
 
   fontRegular = loadFont("assets/fontReg.ttf");
   fontBold = loadFont("assets/fontBold.ttf");
-  
+
+  planetsData[9] = loadJSON("assets/data/mercury.json")
+
 }
 
 function setup()
@@ -42,6 +45,11 @@ function setup()
   for (var i = 0; i < 800; i++)
   {
     stars[i] = new Star();
+  }
+
+  for (var i = planetsData.length; i > 0; i--)
+  {
+    planets[i] = new planets(planetsData[i]);
   }
 
   distTxt = new Distance();

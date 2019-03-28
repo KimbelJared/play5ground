@@ -4,3 +4,4 @@
 Program each planets location
 More menu functionality
 clicking in menu not change translation of screen
+heroku python script to update data in google sheet, then another to update jsons (where to store jsons? firebase?)
