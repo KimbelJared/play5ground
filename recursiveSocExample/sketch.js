@@ -1,4 +1,4 @@
-var xOffset = 25;
+var xOffset = 40;
 var points = [];
 var childYOffsets = [25, 50, 75, 100];
 var numOfChild = [1, 2, 3];
@@ -7,7 +7,7 @@ var colors = [];
 
 function setup()
 {
-  createCanvas(1270, 800);
+  createCanvas(1600, 800);
 
 
   for (i = 0; i < 50; i++)
@@ -24,7 +24,7 @@ function draw()
 
   for (i = 0; i <  points.length;  i++)
   {
-    points[i].show(colors[points[i].gen]);
+    points[i].show();
   }
 
   var z = 1;
@@ -32,6 +32,7 @@ function draw()
   {
     push();
     noStroke();
+    textSize(20);
     fill(colors[z-1]);
     text(z, i, 50);
     pop();
@@ -39,7 +40,13 @@ function draw()
     z++
 
   }
+  push();
 
+  noStroke();
+  fill(colors[0]);
+  ellipse(xOffset, height/2, 5);
+
+  pop();
 }
 
 function ladder()
@@ -50,7 +57,7 @@ function ladder()
 
 function makePoints(px,py, mc)
 {
-  if (points.length < 50 || mc ==  0)
+  if (points.length < 49 || mc ==  0)
   {
     var aPoint = new point(px,py, mc);
     points.push(aPoint);
@@ -67,4 +74,9 @@ function makePoints(px,py, mc)
     var aPoint = new point(px,py, mc);
     points.push(aPoint);
   }
+}
+
+function fetchColor(g)
+{
+  return colors[g];
 }
