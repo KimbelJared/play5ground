@@ -37,8 +37,10 @@ class point
 
       colorMode(RGB, 255)
       fill(this.dotColor);
-      stroke(this.lineColor);
+      stroke(this.dotColor);
       ellipse(this.x, this.y, 5);
+
+      stroke(this.lineColor);
       line(this.px, this.py, this.x, this.y);
 
       pop();
