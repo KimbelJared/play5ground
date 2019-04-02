@@ -1,7 +1,7 @@
 var xOffset = 40;
 var points = [];
 var childYOffsets = [25, 50, 75, 100];
-var numOfChild = [1, 2, 3];
+var numOfChild = [1];
 var coinFlip = [-1, 1];
 var colors = [];
 
@@ -15,7 +15,9 @@ function setup()
     colors[i] = color(random(0,255),random(0,255),random(0,255));
   }
 
-  makePoints(xOffset, height/2);
+  var children = random(numOfChild);
+  makePoints(xOffset, height/2, children);
+
 }
 
 function draw()
@@ -31,12 +33,12 @@ function draw()
   for (i = xOffset; i <  width;  i+= xOffset)
   {
     push();
+    textAlign(CENTER, CENTER);
     noStroke();
     textSize(20);
     fill(colors[z-1]);
     text(z, i, 50);
     pop();
-
     z++
 
   }
@@ -57,22 +59,22 @@ function ladder()
 
 function makePoints(px,py, mc)
 {
-  if (points.length < 49 || mc ==  0)
-  {
-    var aPoint = new point(px,py, mc);
-    points.push(aPoint);
+  //Make the point
+  var aPoint = new point(px,py);
+  points.push(aPoint);
 
-    var child = random(numOfChild);
-    var i = 1;
-    do {
-      makePoints(aPoint.x, aPoint.y, child);
-      i++
-    } while (i < child);
-  }
-  if (points.length < 50 || mc > 0)
+  //Make the children
+  for (i = 0; i <  mc;  i++)
   {
-    var aPoint = new point(px,py, mc);
-    points.push(aPoint);
+    if (aPoint.gen > 38)
+    {
+      return;
+    }
+    else
+    {
+      var children = random(numOfChild);
+      makePoints(aPoint.x, aPoint.y, children);
+    }
   }
 }
 
