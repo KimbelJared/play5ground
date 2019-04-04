@@ -52,9 +52,9 @@ function draw()
   push();
 
   noStroke();
-  fill(colors[0]);
+  fill(colors[1]);
   ellipse(xOffset, height/2, DOT_SIZE);
-
+  //WHY ARE YOU SMALLER
   pop();
 }
 //see if point goes up or down (ayy ladders)
@@ -84,7 +84,7 @@ function makePoints(px,py, mc)
     }
   }
 }
-//provide a way for point class to accuire color 
+//provide a way for point class to accuire color
 function fetchColor(g)
 {
   return colors[g];
