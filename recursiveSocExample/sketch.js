@@ -5,16 +5,19 @@ var numOfChild = [1];
 var coinFlip = [-1, 1];
 var colors = [];
 
+let DOT_SIZE = 5;
+
 function setup()
 {
   createCanvas(1600, 800);
 
-
+  //Creates random colors and pushes them to the array
   for (i = 0; i < 50; i++)
   {
     colors[i] = color(random(0,255),random(0,255),random(0,255));
   }
 
+  //start the recursive generation function
   var children = random(numOfChild);
   makePoints(xOffset, height/2, children);
 
@@ -24,11 +27,13 @@ function draw()
 {
   background(51);
 
+  //display all points
   for (i = 0; i <  points.length;  i++)
   {
     points[i].show();
   }
 
+  //display generation numbers at the top of the sceen
   var z = 1;
   for (i = xOffset; i <  width;  i+= xOffset)
   {
@@ -42,21 +47,23 @@ function draw()
     z++
 
   }
+
+  //draw gen 0 dot
   push();
 
   noStroke();
   fill(colors[0]);
-  ellipse(xOffset, height/2, 5);
+  ellipse(xOffset, height/2, DOT_SIZE);
 
   pop();
 }
-
+//see if point goes up or down (ayy ladders)
 function ladder()
 {
   var val = random(coinFlip);
   return val;
 }
-
+//recursivly create points
 function makePoints(px,py, mc)
 {
   //Make the point
@@ -77,7 +84,7 @@ function makePoints(px,py, mc)
     }
   }
 }
-
+//provide a way for point class to accuire color 
 function fetchColor(g)
 {
   return colors[g];

@@ -1,6 +1,6 @@
 class point
 {
-
+  //Create all variables that the points will need
   constructor(px, py)
   {
       this.px = px;
@@ -11,6 +11,7 @@ class point
       this.dotColor = color(200);
       //this.lineColor = color(200);
   }
+  //Make sure point is in bounds, and has valid color
   test()
   {
     this.dotColor = fetchColor(this.gen);
@@ -29,6 +30,7 @@ class point
 
 
   }
+  //Diplay point on screen
   show()
   {
       push();
@@ -38,7 +40,7 @@ class point
       colorMode(RGB, 255)
       fill(this.dotColor);
       stroke(this.dotColor);
-      ellipse(this.x, this.y, 5);
+      ellipse(this.x, this.y, DOT_SIZE);
 
       //stroke(this.lineColor);
       //line(this.px, this.py, this.x, this.y);
