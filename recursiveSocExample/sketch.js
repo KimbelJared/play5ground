@@ -1,5 +1,6 @@
 var xOffset = 40;
 var points = [];
+var lines = [];
 var childYOffsets = [25, 50, 75, 100];
 var numOfChild = [1];
 var coinFlip = [-1, 1];
@@ -30,8 +31,14 @@ function draw()
   //display all points
   for (i = 0; i <  points.length;  i++)
   {
-    points[i].show();
+    //points[i].show();
   }
+  for (i = 0; i <  lines.length;  i++)
+  {
+    lines[i].show();
+  }
+
+  drawLines(5);
 
   //display generation numbers at the top of the sceen
   var z = 1;
@@ -52,7 +59,7 @@ function draw()
   push();
 
   noStroke();
-  fill(colors[1]);
+  fill(colors[0]);
   ellipse(xOffset, height/2, DOT_SIZE);
   //WHY ARE YOU SMALLER
   pop();
@@ -69,6 +76,7 @@ function makePoints(px,py, mc)
   //Make the point
   var aPoint = new point(px,py);
   points.push(aPoint);
+  //drawLines(aPoint, .25);
 
   //Make the children
   for (i = 0; i <  mc;  i++)
@@ -88,4 +96,34 @@ function makePoints(px,py, mc)
 function fetchColor(g)
 {
   return colors[g];
+}
+
+//draw the gradiant lines between 2 points
+function drawLines(/*point,*/ tol)
+{
+    let x1 = /*point.px*/ xOffset;
+    let y1 = /*point.py*/height/2;
+    let pc = fetchColor(/*this.gen-1*/0);
+    let tc = fetchColor(1)/*this.dotColor*/;
+    let aLine = 0;
+
+    while(x1 <= (xOffset*2/*this.x*/))
+    {
+      x2 = x1+tol;
+      let z = ((y1-/*point.y*/75)/(80-x1)) * tol
+      y2 = y1-z;
+      let c = lerpColor(pc, tc, .25);
+
+      aLine = new lineObj(x1, y1, x2 , y2, c);
+      lines.push(aLine);
+
+      console.log("x1: " + x1);
+      console.log("y1: " + y1);
+      console.log("x2: " + x2);
+      console.log("y2: " + y2);
+
+      x1 = x2;
+      y1 = y2;
+      pc = c;
+    }
 }

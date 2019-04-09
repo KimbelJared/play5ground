@@ -41,7 +41,7 @@ class point
 
       stroke(this.lineColor);
       line(this.px, this.py, this.x, this.y);
-
+      //drawLines()
 
       pop();
   }
