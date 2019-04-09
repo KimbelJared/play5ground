@@ -31,14 +31,12 @@ function draw()
   //display all points
   for (i = 0; i <  points.length;  i++)
   {
-    //points[i].show();
+    points[i].show();
   }
   for (i = 0; i <  lines.length;  i++)
   {
     lines[i].show();
   }
-
-  drawLines(5);
 
   //display generation numbers at the top of the sceen
   var z = 1;
@@ -76,7 +74,7 @@ function makePoints(px,py, mc)
   //Make the point
   var aPoint = new point(px,py);
   points.push(aPoint);
-  //drawLines(aPoint, .25);
+  drawLines(aPoint, .25);
 
   //Make the children
   for (i = 0; i <  mc;  i++)
@@ -99,18 +97,18 @@ function fetchColor(g)
 }
 
 //draw the gradiant lines between 2 points
-function drawLines(/*point,*/ tol)
+function drawLines(point, tol)
 {
-    let x1 = /*point.px*/ xOffset;
-    let y1 = /*point.py*/height/2;
-    let pc = fetchColor(/*this.gen-1*/0);
-    let tc = fetchColor(1)/*this.dotColor*/;
+    let x1 = point.px;
+    let y1 = point.py;
+    let pc = fetchColor(this.gen-1);
+    let tc = this.dotColor;
     let aLine = 0;
 
-    while(x1 <= (xOffset*2/*this.x*/))
+    while(x1 <= (point.x))
     {
       x2 = x1+tol;
-      let z = ((y1-/*point.y*/75)/(80-x1)) * tol
+      let z = ((point.x-point.px)/(point.x-x1)) * tol
       y2 = y1-z;
       let c = lerpColor(pc, tc, .25);
 
