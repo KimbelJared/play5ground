@@ -1,5 +1,13 @@
 function Boundry(x, y, w)
 {
+  if (random() > 0.5)
+  {
+    this.display = true;
+  } else
+  {
+    this.display = false;
+  }
+
   if(w == 0)
   {
     this.xCoordinate_1 = x;
@@ -28,8 +36,12 @@ function Boundry(x, y, w)
 
   this.show = function()
   {
-    stroke(255);
-    line(this.xCoordinate_1, this.yCoordinate_1, this.xCoordinate_2, this.yCoordinate_2);
+    if(this.display)
+    {
+      stroke(255);
+      line(this.xCoordinate_1, this.yCoordinate_1, this.xCoordinate_2, this.yCoordinate_2);
+    }
+
   }
 
 

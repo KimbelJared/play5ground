@@ -11,14 +11,10 @@ function Box(x, y)
     push();
     noFill();
     stroke(255);
-    
-    if (random() > 0.5)
+
     this.upLine.show();
-    if (random() > 0.5)
     this.rightLine.show();
-    if (random() > 0.5)
     this.downLine.show();
-    if (random() > 0.5)
     this.leftLine.show();
 
     pop();
