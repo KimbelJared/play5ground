@@ -2,11 +2,21 @@
 let MAZE_SIZE = 500;
 let BOX_SIZE = MAZE_SIZE/10;
 let SPEED = 5;
+let MAZE_GRID = 10;
 //Solver
 var buddy;
 
 //Arrays
 var boxes = [];
+
+//Mazes
+var mazeJSON;
+
+function preLoad()
+{
+  //load Mazes
+  mazeJSON = loadJSON("http://jaredkimbel.com/projects/maze/assets/maze1.json", mazePrep);
+}
 
 function setup()
 {
@@ -14,12 +24,15 @@ function setup()
 
   buddy = new Solver();
 
-  for (let x = 1; x <= 11; x++)
+  //Create all the boxes
+  var num = 1;
+  for (let x = 1; x <= MAZE_GRID+1; x++)
   {
     boxes[x] = []; // create nested array
-    for (let y = 1; y < 11; y++)
+    for (let y = 1; y < MAZE_GRID+1; y++)
     {
-      boxes[x][y] = new Box(x,y);
+      boxes[x][y] = new Box(x,y,num);
+      num++;
     }
   }
 }
@@ -35,47 +48,35 @@ function draw()
   //square(100, 100, MAZE_SIZE);
   pop();
 
-  for (let x = 1; x < 11; x++)
+  for (let x = 1; x < MAZE_GRID+1; x++)
   {
-    for (let y = 1; y < 11; y++)
+    for (let y = 1; y < MAZE_GRID+1; y++)
     {
       boxes[x][y].show();
     }
   }
 
-  buddy.update();
   buddy.show();
+}
+
+function mazePrep(maze)
+{
+    console.log(maze.one.drawUp);
 }
 
 function keyPressed()
 {
   if (keyCode === UP_ARROW)
   {
-    buddy.goingUp = true;
+    buddy.move(0, -1);
   } else if (keyCode === RIGHT_ARROW)
   {
-    buddy.goingRight = true;
+    buddy.move(1,0);
   } else if (keyCode === DOWN_ARROW)
   {
-    buddy.goingDown = true;
+    buddy.move(0,1);
   } else if (keyCode === LEFT_ARROW)
   {
-    buddy.goingLeft = true;
-  }
-}
-function keyReleased()
-{
-  if (keyCode === UP_ARROW)
-  {
-    buddy.goingUp = false;
-  } else if (keyCode === RIGHT_ARROW)
-  {
-    buddy.goingRight = false;
-  } else if (keyCode === DOWN_ARROW)
-  {
-    buddy.goingDown = false;
-  } else if (keyCode === LEFT_ARROW)
-  {
-    buddy.goingLeft = false;
+    buddy.move(-1,0);
   }
 }

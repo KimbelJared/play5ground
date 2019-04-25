@@ -1,0 +1,19 @@
+{
+  "Grid Size": 10,
+
+  "one" :
+    {
+      "drawUp": "0",
+      "drawRight": "0",
+      "drawDown": "1",
+      "drawLeft": "1"
+    },
+
+  "two" :
+    {
+      "drawUp": "0",
+      "drawRight": "0",
+      "drawDown": "1",
+      "drawLeft": "1"
+    }
+}
