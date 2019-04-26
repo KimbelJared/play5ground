@@ -1,32 +1,69 @@
-var slider;
+var sliderA, sliderB;
 
-var length, area_1, area_2, volume_1, volume_2;
+var lengthA, lengthB;
+var areaA, areaB;
+var volumeA, volumeB;
+var myFont;
+
+function preLoad()
+{
+  myFont = loadFont("http://jaredkimbel.com/projects/sclaw/Montserrat-Black.otf");
+}
 
 function setup()
 {
-  var canvas = createCanvas(800, 800, WEBGL);
-
-  slider = createSlider(50, 300, 100);
-  slider.position(10, 10);
+  createCanvas(1200, 600, WEBGL);
+  sliderA = createSlider(50, 300, 100);
+  sliderA.position(600-(width/4)-60, 10);
+  sliderB = createSlider(60, 310, 110);
+  sliderB.position((600+width/4)-60, 10);
 }
 
 function draw()
 {
   background(51);
 
-  length = slider.value();
+  lengthA = sliderA.value();
 
-  area_1 = pow(length, 2);
-  volume_1 = pow(length, 3);
+  if(lengthB > lengthA)
+  {
+    lengthB = sliderB.value();
+  } else
+  {
+    lengthB = lengthA+10;
+    sliderB.value(lengthB);
+  }
 
+  drawBoxes();
+  drawText();
+}
+
+function drawBoxes()
+{
+  //boxA
   push();
-  rectMode(CENTER);
-  //square(width/2, height/2, length);
-  pop();
-
-  push();
+  translate(-(width/4), 0);
   rotateX(frameCount * 0.01);
   rotateY(frameCount * 0.01);
-  box(length);
+  box(lengthA);
   pop();
+
+  //boxB
+  push();
+  translate(width/4, 0);
+  rotateX(frameCount * 0.01);
+  rotateY(frameCount * 0.01);
+  box(lengthB);
+  pop();
+}
+
+function drawText()
+{
+  push();
+  
+  //text("Length of A: " + lengthA, 600-(width/4)-60, 20);
+  //text("Length of B: " + lengthB, (600+width/4)-60, 20);
+
+  pop();
+
 }
