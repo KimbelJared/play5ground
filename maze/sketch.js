@@ -56,7 +56,7 @@ function draw()
     }
   }
 
-  console.log(mazeJSON.one[0]);
+  console.log(mazeJSON.one);
 
   buddy.show();
 }
