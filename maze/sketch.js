@@ -10,12 +10,12 @@ var buddy;
 var boxes = [];
 
 //Mazes
-var mazeJSON;
+var mazeJSON = {};
 
 function preLoad()
 {
   //load Mazes
-  mazeJSON = loadJSON("http://jaredkimbel.com/projects/maze/assets/maze1.json", mazePrep);
+  mazeJSON = loadJSON("assets/maze1.json");
 }
 
 function setup()
@@ -52,16 +52,13 @@ function draw()
   {
     for (let y = 1; y < MAZE_GRID+1; y++)
     {
-      boxes[x][y].show();
+      //boxes[x][y].show();
     }
   }
 
-  buddy.show();
-}
+  console.log(mazeJSON.one[0]);
 
-function mazePrep(maze)
-{
-    console.log(maze.one.drawUp);
+  buddy.show();
 }
 
 function keyPressed()
