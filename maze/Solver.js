@@ -8,6 +8,16 @@ function Solver()
   this.goingDown = false;
   this.goingLeft = false;
 
+  this.show = function()
+  {
+    push();
+    noStroke();
+    fill(200, 76, 87);
+    rectMode(CENTER);
+    rect(this.x, this.y, BOX_SIZE-10, BOX_SIZE-10);
+    pop();
+  }
+
   this.move = function(x, y)
   {
     this.y+= (BOX_SIZE)*y;
@@ -34,13 +44,8 @@ function Solver()
     }
   }
 
-  this.show = function()
+  this.validMovement = function()
   {
-    push();
-    noStroke();
-    fill(200, 76, 87);
-    rectMode(CENTER);
-    rect(this.x, this.y, BOX_SIZE-10, BOX_SIZE-10);
-    pop();
+    
   }
 }
