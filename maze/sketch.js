@@ -12,10 +12,10 @@ var boxes = [];
 //Mazes
 var mazeJSON = {};
 
-function preLoad()
+function preload()
 {
   //load Mazes
-  mazeJSON = loadJSON("assets/maze1.json");
+  mazeJSON = loadJSON('http://jaredkimbel.com/projects/maze/assets/maze1.json');
 }
 
 function setup()
@@ -31,10 +31,11 @@ function setup()
     boxes[x] = []; // create nested array
     for (let y = 1; y < MAZE_GRID+1; y++)
     {
-      boxes[x][y] = new Box(x,y,num);
+      //boxes[x][y] = new Box(x,y,num);
       num++;
     }
   }
+  //boxes[1][1] = new Box(1,1,1);
 }
 
 function draw()
@@ -55,8 +56,8 @@ function draw()
       //boxes[x][y].show();
     }
   }
-
-  console.log(mazeJSON.one);
+  //boxes[1][1].show();
+  //console.log(mazeJSON[1][0]);
 
   buddy.show();
 }

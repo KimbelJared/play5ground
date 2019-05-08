@@ -1,6 +1,6 @@
-function Boundry(x, y, w)
+function Boundry(x, y, w, dis)
 {
-  if (random() > 0.5)
+  if (dis)
   {
     this.display = true;
   } else
