@@ -3,7 +3,7 @@ let MAZE_SIZE = 500;
 let BOX_SIZE = MAZE_SIZE/10;
 let SPEED = 5;
 let MAZE_GRID = 10;
-let DEBUG = true;
+let DEBUG = false;
 
 //Variables
 var boxes = [];
