@@ -44,8 +44,6 @@ function Boundry(x, y, w)
     {
       this.display = !this.display;
     }
-
-
   }
 
 }

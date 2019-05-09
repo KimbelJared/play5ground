@@ -1,19 +1,19 @@
 {
   "1": [
     true,
-    true,
-    true,
+    false,
+    false,
     true
   ],
   "2": [
+    false,
     true,
-    true,
-    true,
+    false,
     true
   ],
   "3": [
-    true,
-    true,
+    false,
+    false,
     true,
     true
   ],
@@ -25,19 +25,19 @@
   ],
   "5": [
     true,
-    true,
-    true,
+    false,
+    false,
     true
   ],
   "6": [
+    false,
     true,
-    true,
-    true,
+    false,
     true
   ],
   "7": [
-    true,
-    true,
+    false,
+    false,
     true,
     true
   ],
@@ -61,9 +61,9 @@
   ],
   "11": [
     true,
+    false,
     true,
-    true,
-    true
+    false
   ],
   "12": [
     true,
@@ -74,32 +74,32 @@
   "13": [
     true,
     true,
-    true,
-    true
+    false,
+    false
   ],
   "14": [
+    false,
     true,
-    true,
-    true,
+    false,
     true
   ],
   "15": [
+    false,
     true,
     true,
-    true,
-    true
+    false
   ],
   "16": [
     true,
-    true,
+    false,
     true,
     true
   ],
   "17": [
     true,
+    false,
     true,
-    true,
-    true
+    false
   ],
   "18": [
     true,
@@ -121,45 +121,45 @@
   ],
   "21": [
     true,
-    true,
-    true,
-    true
+    false,
+    false,
+    false
   ],
   "22": [
+    false,
     true,
-    true,
-    true,
+    false,
     true
   ],
   "23": [
+    false,
     true,
-    true,
-    true,
+    false,
     true
   ],
   "24": [
+    false,
     true,
-    true,
-    true,
+    false,
     true
   ],
   "25": [
+    false,
     true,
-    true,
-    true,
+    false,
     true
   ],
   "26": [
+    false,
     true,
-    true,
-    true,
-    true
+    false,
+    false
   ],
   "27": [
+    false,
     true,
     true,
-    true,
-    true
+    false
   ],
   "28": [
     true,
@@ -182,29 +182,29 @@
   "31": [
     true,
     true,
-    true,
-    true
+    false,
+    false
   ],
   "32": [
-    true,
-    true,
+    false,
+    false,
     true,
     true
   ],
   "33": [
     true,
-    true,
-    true,
+    false,
+    false,
     true
   ],
   "34": [
+    false,
     true,
-    true,
-    true,
+    false,
     true
   ],
   "35": [
-    true,
+    false,
     true,
     true,
     true
@@ -241,21 +241,21 @@
   ],
   "41": [
     true,
-    true,
-    true,
+    false,
+    false,
     true
   ],
   "42": [
+    false,
     true,
     true,
-    true,
-    true
+    false
   ],
   "43": [
     true,
+    false,
     true,
-    true,
-    true
+    false
   ],
   "44": [
     true,
@@ -302,20 +302,20 @@
   "51": [
     true,
     true,
-    true,
-    true
+    false,
+    false
   ],
   "52": [
-    true,
-    true,
+    false,
+    false,
     true,
     true
   ],
   "53": [
     true,
+    false,
     true,
-    true,
-    true
+    false
   ],
   "54": [
     true,
@@ -361,21 +361,21 @@
   ],
   "61": [
     true,
-    true,
-    true,
+    false,
+    false,
     true
   ],
   "62": [
+    false,
     true,
     true,
-    true,
-    true
+    false
   ],
   "63": [
     true,
+    false,
     true,
-    true,
-    true
+    false
   ],
   "64": [
     true,
@@ -422,20 +422,20 @@
   "71": [
     true,
     true,
-    true,
-    true
+    false,
+    false
   ],
   "72": [
-    true,
-    true,
+    false,
+    false,
     true,
     true
   ],
   "73": [
     true,
+    false,
     true,
-    true,
-    true
+    false
   ],
   "74": [
     true,
@@ -481,21 +481,21 @@
   ],
   "81": [
     true,
-    true,
-    true,
+    false,
+    false,
     true
   ],
   "82": [
+    false,
     true,
     true,
-    true,
-    true
+    false
   ],
   "83": [
     true,
+    false,
     true,
-    true,
-    true
+    false
   ],
   "84": [
     true,
@@ -542,20 +542,20 @@
   "91": [
     true,
     true,
-    true,
-    true
+    false,
+    false
   ],
   "92": [
+    false,
     true,
-    true,
-    true,
+    false,
     true
   ],
   "93": [
+    false,
     true,
     true,
-    true,
-    true
+    false
   ],
   "94": [
     true,

@@ -10,7 +10,7 @@ var boxes = [];
 var mazeJSON = {};
 var clickedX = 0;
 var clickedY = 1;
-
+var saveButton;
 
 function preload()
 {
@@ -18,9 +18,14 @@ function preload()
 
 function setup()
 {
-  //create canvas and attach click listener
+  //Create canvas and attach click listener
   cnv = createCanvas(700, 700);
   cnv.mouseClicked(canvasActivity);
+
+  //Create save button
+  saveButton = createButton('Save');
+  saveButton.position(19, 19);
+  saveButton.mousePressed(outputMaze);
 
   //Create all the boxes
   var num = 1;
@@ -76,4 +81,31 @@ function canvasActivity()
     }
   }
 
+}
+
+function outputMaze()
+{
+  var jsonOutput = {};
+  jsonOutput.Grid_Size = 10;
+
+  for (let x = 1; x < MAZE_GRID+1; x++)
+  {
+    for (let y = 1; y < MAZE_GRID+1; y++)
+    {
+      var id = boxes[x][y].boxNumber;
+
+      if(DEBUG)
+      {
+        console.log("Box [" + x + "][" + y + "]");
+        console.log("Id : " + id);
+      }
+
+      jsonOutput[id] = [];
+      jsonOutput[id][0] = boxes[x][y].upLine.display;
+      jsonOutput[id][1] = boxes[x][y].rightLine.display;
+      jsonOutput[id][2] = boxes[x][y].downLine.display;
+      jsonOutput[id][3] = boxes[x][y].leftLine.display;
+    }
+  }
+  saveJSON(jsonOutput, 'myMaze.json');
 }
