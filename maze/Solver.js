@@ -2,6 +2,8 @@ function Solver()
 {
   this.x = (BOX_SIZE+50)+(BOX_SIZE/2);
   this.y = (BOX_SIZE+50)+(BOX_SIZE/2);
+  this.boxX = 1;
+  this.boxY = 1;
 
   this.goingUp = false;
   this.goingRight = false;
@@ -20,32 +22,90 @@ function Solver()
 
   this.move = function(x, y)
   {
-    this.y+= (BOX_SIZE)*y;
-    this.x+= (BOX_SIZE)*x;
-    this.verifyLocation();
-  }
+    var validLocation = this.verifyLocation(x, y);
 
-  this.verifyLocation = function()
-  {
-    if (this.x > width-((BOX_SIZE+50)+(BOX_SIZE/2)))
+    if(!validLocation)
     {
-      this.x = (BOX_SIZE+50)+(BOX_SIZE/2);
-    } else if (this.x < 0+((BOX_SIZE+50)+(BOX_SIZE/2)))
+      var validMove = false;
+    } else
     {
-      this.x = width-((BOX_SIZE+50)+(BOX_SIZE/2));
+      var validMove = this.validMovement(x, y);
     }
 
-    if (this.y > height-((BOX_SIZE+50)+(BOX_SIZE/2)))
+    if(validMove && validLocation)
     {
-      this.y = (BOX_SIZE+50)+(BOX_SIZE/2);
-    } else if (this.y < 0+((BOX_SIZE+50)+(BOX_SIZE/2)))
+      this.y+= (BOX_SIZE)*y;
+      this.x+= (BOX_SIZE)*x;
+
+      this.boxX+= x;
+      this.boxY+= y;
+    }
+
+
+
+    if(DEBUG)
     {
-      this.y = height-((BOX_SIZE+50)+(BOX_SIZE/2));
+      console.log("validLocation: "+ validLocation);
+      console.log("validMovement: "+ validMove);
+      console.log("Solver X: " + this.boxX);
+      console.log("Solver Y: " + this.boxY);
+
     }
   }
 
-  this.validMovement = function()
+  this.verifyLocation = function(x, y)
   {
-    
+    var nextX = this.boxX+ x;
+    var nextY = this.boxY+ y;
+
+    if(nextX > 10 || nextX < 1)
+    {
+      return false;
+    }
+    if(nextY > 10 || nextY < 1)
+    {
+      return false;
+    }
+    return true;
+  }
+
+  this.validMovement = function(x, y)
+  {
+    //Test for x movement
+    if(x == 0)
+    {
+
+    } else if(x > 0)
+    {
+      if(boxes[this.boxX][this.boxY].rightLine.display && boxes[this.boxX+1][this.boxY].leftLine.display)
+      {
+        return false;
+      }
+    } else if(x < 0)
+    {
+      if(boxes[this.boxX][this.boxY].leftLine.display && boxes[this.boxX-1][this.boxY].rightLine.display)
+      {
+        return false;
+      }
+    }
+
+    //Test for y movement
+    if(y == 0)
+    {
+
+    } else if(y > 0)
+    {
+      if(boxes[this.boxX][this.boxY].downLine.display && boxes[this.boxX][this.boxY+1].upLine.display)
+      {
+        return false;
+      }
+    } else if(y < 0)
+    {
+      if(boxes[this.boxX][this.boxY].upLine.display && boxes[this.boxX][this.boxY+1].downLine.display)
+      {
+        return false;
+      }
+    }
+    return true;
   }
 }
