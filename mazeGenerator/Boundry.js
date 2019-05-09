@@ -38,5 +38,14 @@ function Boundry(x, y, w)
 
   }
 
+  this.checkCollision = function()
+  {
+    if(collidePointLine(clickedX, clickedY, this.xCoordinate_1, this.yCoordinate_1, this.xCoordinate_2, this.yCoordinate_2, 1))
+    {
+      this.display = !this.display;
+    }
+
+
+  }
 
 }

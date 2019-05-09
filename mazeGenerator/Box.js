@@ -46,7 +46,15 @@ function Box(x, y, num)
 
   this.checkCollision = function()
   {
-    //console.log("Box " + this.boxNumber + " checking in");
+    this.upLine.checkCollision();
+    this.rightLine.checkCollision();
+    this.downLine.checkCollision();
+    this.leftLine.checkCollision();
+
+    if(DEBUG)
+    {
+      console.log("Box " + this.boxNumber + " checking in");
+    }
   }
 
 }

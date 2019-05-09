@@ -3,13 +3,14 @@ let MAZE_SIZE = 500;
 let BOX_SIZE = MAZE_SIZE/10;
 let SPEED = 5;
 let MAZE_GRID = 10;
-let DEBUG = false;
+let DEBUG = true;
 
-//Arrays
+//Variables
 var boxes = [];
-
-//Maze
 var mazeJSON = {};
+var clickedX = 0;
+var clickedY = 1;
+
 
 function preload()
 {
@@ -64,6 +65,9 @@ function draw()
 
 function canvasActivity()
 {
+  clickedX = mouseX;
+  clickedY = mouseY;
+
   for (let x = 1; x < MAZE_GRID+1; x++)
   {
     for (let y = 1; y < MAZE_GRID+1; y++)
