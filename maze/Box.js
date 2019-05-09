@@ -9,7 +9,6 @@ function Box(x, y, num)
     console.log("S : " + mazeJSON[num][2]);
     console.log("W : " + mazeJSON[num][3]);
   }
-  
   this.xCoordinate = x;
   this.yCoordinate = y;
   this.boxNumber = num;
@@ -23,24 +22,20 @@ function Box(x, y, num)
     push();
     noFill();
     stroke(255);
-
     this.upLine.show();
     this.rightLine.show();
     this.downLine.show();
     this.leftLine.show();
-
     pop();
 
     //box numbers
     push();
     noFill();
     stroke(118, 193, 42);
-
     if(DEBUG)
     {
       text(this.boxNumber, this.xCoordinate*BOX_SIZE+75, this.yCoordinate*BOX_SIZE+75);
     }
-
     pop();
   }
 

@@ -1,7 +1,7 @@
 function Solver()
 {
-  this.x = (BOX_SIZE+50)+(BOX_SIZE/2);
-  this.y = (BOX_SIZE+50)+(BOX_SIZE/2);
+  this.x = (BOX_SIZE+50)+ BOX_SIZE/2;
+  this.y = (BOX_SIZE+50)+ BOX_SIZE/2;
   this.boxX = 1;
   this.boxY = 1;
 
@@ -16,7 +16,7 @@ function Solver()
     noStroke();
     fill(200, 76, 87);
     rectMode(CENTER);
-    rect(this.x, this.y, BOX_SIZE-10, BOX_SIZE-10);
+    rect(this.x, this.y, 25, 25);
     pop();
   }
 
@@ -41,15 +41,12 @@ function Solver()
       this.boxY+= y;
     }
 
-
-
     if(DEBUG)
     {
       console.log("validLocation: "+ validLocation);
       console.log("validMovement: "+ validMove);
       console.log("Solver X: " + this.boxX);
       console.log("Solver Y: " + this.boxY);
-
     }
   }
 
@@ -101,7 +98,7 @@ function Solver()
       }
     } else if(y < 0)
     {
-      if(boxes[this.boxX][this.boxY].upLine.display && boxes[this.boxX][this.boxY+1].downLine.display)
+      if(boxes[this.boxX][this.boxY].upLine.display && boxes[this.boxX][this.boxY-1].downLine.display)
       {
         return false;
       }

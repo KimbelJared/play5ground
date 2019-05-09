@@ -18,7 +18,6 @@ function preload()
 {
   //load Mazes
   mazeJSON = loadJSON('http://jaredkimbel.com/projects/maze/assets/defaultMaze.json');
-
 }
 
 function setup()
@@ -51,19 +50,11 @@ function setup()
       break;
     }
   }
-
 }
 
 function draw()
 {
   background(51);
-
-  //Create initial square for maze to exist in
-  push();
-  noFill();
-  stroke(255);
-  //square(100, 100, MAZE_SIZE);
-  pop();
 
   //Draw boxes to the screen
   for (let x = 1; x < MAZE_GRID+1; x++)
@@ -73,7 +64,6 @@ function draw()
       boxes[x][y].show();
     }
   }
-
   buddy.show();
 }
 
