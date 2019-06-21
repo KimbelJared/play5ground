@@ -14,9 +14,9 @@ function setup()
   dotC = new point(600, 400, color('#ffd3b6'));
   dotD = new point(600, 600, color('#ffaaa5'));
 
-  line1 = new fancyLine(dotA, dotB);
-  line2 = new fancyLine(dotA, dotC);
-  line3 = new fancyLine(dotA, dotD);
+  line1 = new fancyLine(dotA, dotB, true);
+  line2 = new fancyLine(dotA, dotC, true);
+  line3 = new fancyLine(dotA, dotD, true);
 }
 
 function draw()

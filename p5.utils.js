@@ -80,7 +80,7 @@ Line Object
 p5.prototype.fancyLine = class
 {
   //Create all variables that the line will need
-  constructor(point1, point2)
+  constructor(point1, point2, gradient)
   {
       this.x1 = point1.x;
       this.y1 = point1.y;
@@ -96,14 +96,16 @@ p5.prototype.fancyLine = class
 
       this.gradientLines = [];
 
-      if(this.color1 == this.color2)
+      if(gradient && this.color1 != this.color2)
       {
-        if(DEBUG) {console.log("Colors are the same, no need for gradient");}
-
+        if(DEBUG) {console.log("Colors are different, preparing gradient.");}
+        this.gradientLines = createGradient(point1, point2, this.slope);
+      } else if (this.color1 == this.color2)
+      {
+        if(DEBUG) {console.log("Colors are the same, no need for gradient.");}
       } else
       {
-        if(DEBUG) {console.log("Colors are different, preparing gradient");}
-        this.gradientLines = createGradient(point1, point2, this.slope);
+        if(DEBUG) {console.log("Gradient not enabled for this line.");}
       }
   }
 
