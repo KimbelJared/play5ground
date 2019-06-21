@@ -187,9 +187,19 @@ p5.prototype.createGradient = function(startPoint, endPoint, slope)
   } else if (slope > 0)
   {
     if(DEBUG) {console.log("Slope > 0");}
+    pointArray[0] = createGradientPoint(startPoint, endPoint);
+    for(i=1; i<20; i++)
+    {
+      pointArray[i] = createGradientPoint(pointArray[i-1], endPoint);
+    }
   } else
   {
     if(DEBUG) {console.log("Slope == 0");}
+    pointArray[0] = createGradientPoint(startPoint, endPoint);
+    for(i=1; i<20; i++)
+    {
+      pointArray[i] = createGradientPoint(pointArray[i-1], endPoint);
+    }
   }
   return pointArray;
 }
@@ -207,10 +217,11 @@ p5.prototype.createGradientPoint = function(startPoint, endPoint)
   let ex = endPoint.x;
   let ey = endPoint.y;
 
-  let delta = (ex-ey)/1000;
+  //HERE LIES THE PROBLEM
+  //let delta = (ex-ey)/1000;
 
-  let midX = lerp(sx, ex, delta);
-  let midY = lerp(sy, ey, delta);
+  let midX = lerp(sx, ex, .1);
+  let midY = lerp(sy, ey, .1);
   var tempPoint = new point(midX, midY, 255);
 
   return tempPoint;
