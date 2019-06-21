@@ -94,9 +94,10 @@ p5.prototype.fancyLine = class
       this.slope = findSlope(point1, point2);
       if(DEBUG) {console.log("Slope: "+this.slope);}
 
-      this.gradientLines = [];
+      this.gradient = gradient;
+      if(this.gradient) {this.gradientLines = [];}
 
-      if(gradient && this.color1 != this.color2)
+      if(this.gradient && this.color1 != this.color2)
       {
         if(DEBUG) {console.log("Colors are different, preparing gradient.");}
         this.gradientLines = createGradient(point1, point2, this.slope);
@@ -113,10 +114,13 @@ p5.prototype.fancyLine = class
   {
     line(this.x1, this.y1, this.x2, this.y2);
 
-    for(let i = 0; i < this.gradientLines.length; i++)
+    if(this.gradient)
     {
-      this.gradientLines[i].show();
-    }
+      for(let i = 0; i < this.gradientLines.length; i++)
+      {
+        this.gradientLines[i].show();
+      }
+    }    
   }
 }
 
