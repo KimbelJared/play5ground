@@ -20,7 +20,12 @@ p5.prototype.point = class
   {
       this.x = x;
       this.y = y;
-      this.color = color;
+      if (color == null)
+      {
+        this.color = 255;
+      } else {
+        this.color = color;
+      }
   }
   //Make sure point is in bounds
   test()
@@ -71,44 +76,41 @@ p5.prototype.fancyLine = class
   //Create all variables that the line will need
   constructor(point1, point2, gradient)
   {
-      this.x1 = point1.x;
-      this.y1 = point1.y;
+      this.p1 = point1;
+      this.p2 = point2;
+      this.gradient = false;
 
-      this.x2 = point2.x;
-      this.y2 = point2.y;
-
-      this.color1 = point1.color;
-      this.color2 = point2.color;
-
-      this.slope = findSlope(point1, point2);
+      this.slope = findSlope(this.p1, this.p2);
       if(DEBUG) {console.log("Slope: "+this.slope);}
-
-      this.gradient = gradient;
-      if(this.gradient) {this.gradientLines = [];}
-
-      if(this.gradient && this.color1 != this.color2)
-      {
-        if(DEBUG) {console.log("Colors are different, preparing gradient.");}
-        this.gradientLines = createGradient(point1, point2, this.slope);
-      } else if (this.color1 == this.color2)
-      {
-        if(DEBUG) {console.log("Colors are the same, no need for gradient.");}
-      } else
-      {
-        if(DEBUG) {console.log("Gradient not enabled for this line.");}
-      }
   }
 
   show()
   {
-    line(this.x1, this.y1, this.x2, this.y2);
-
     if(this.gradient)
     {
       for(let i = 0; i < this.gradientLines.length; i++)
       {
         this.gradientLines[i].show();
       }
+    } else
+    {
+      line(this.p1.x, this.p1.y, this.p2.x, this.p2.y);
+    }
+  }
+
+  enableGradient()
+  {
+    this.gradient = !this.gradient
+    if(this.gradient && this.p1.color != this.p2.color)
+    {
+      if(DEBUG) {console.log("Colors are different, preparing gradient.");}
+      this.gradientLines = createGradient(this.p1, this.p2, this.slope);
+    } else if (this.color1 == this.color2)
+    {
+      if(DEBUG) {console.log("Colors are the same, no need for gradient.");}
+    } else
+    {
+      if(DEBUG) {console.log("Gradient not enabled for this line.");}
     }
   }
 }
@@ -129,7 +131,7 @@ p5.prototype.fancyLineSegment = class
     this.x2 = point2.x;
     this.y2 = point2.y;
 
-    this.color1 = point1.color;
+    this.color = point1.color;
   }
 
   show()
@@ -150,7 +152,7 @@ Finding Slope Function
 */
 p5.prototype.findSlope = function(point1, point2)
 {
-  //get needed variables
+  //setup needed variables
   let x1 = point1.x;
   let y1 = point1.y;
 
@@ -170,56 +172,68 @@ p5.prototype.createGradient = function(startPoint, endPoint, slope)
   var lineArray = [];
   var pointArray = [];
 
+  var tempX = startPoint.x;
+  var tempY = startPoint.y;
+
   if(slope < 0)
   {
     if(DEBUG) {console.log("Slope < 0");}
-    pointArray[0] = createGradientPoint(startPoint, endPoint);
-    for(i=1; i<20; i++)
+
+    let deltaX = (endPoint.x-startPoint.x)/GRADIENT_FINENESS;
+    let deltaY = (startPoint.y-endPoint.y)/GRADIENT_FINENESS;
+
+    for(let i = 0; i < GRADIENT_FINENESS; i++)
     {
-      pointArray[i] = createGradientPoint(pointArray[i-1], endPoint);
+      pointArray[i] = new point(tempX+deltaX, tempY+deltaY);
+      tempX += deltaX;
+      tempY -= deltaY;
     }
-    //lineArray = createGradientLineSegments(pointsArray);
+
   } else if (slope > 0)
   {
     if(DEBUG) {console.log("Slope > 0");}
-    pointArray[0] = createGradientPoint(startPoint, endPoint);
-    for(i=1; i<20; i++)
+
+    let deltaX = (endPoint.x-startPoint.x)/GRADIENT_FINENESS;
+    let deltaY = (endPoint.y-startPoint.y)/GRADIENT_FINENESS;
+
+    for(let i = 0; i < GRADIENT_FINENESS; i++)
     {
-      pointArray[i] = createGradientPoint(pointArray[i-1], endPoint);
+      pointArray[i] = new point(tempX+deltaX, tempY+deltaY);
+      tempX += deltaX;
+      tempY += deltaY;
+    }
+  } else if (slope == 0)
+  {
+    if(DEBUG) {console.log("Slope == 0");}
+
+    let deltaX = (endPoint.x-startPoint.x)/GRADIENT_FINENESS;
+
+    for(let i = 0; i < GRADIENT_FINENESS; i++)
+    {
+      pointArray[i] = new point(tempX+deltaX, tempY);
+      tempX += deltaX;
     }
   } else
   {
-    if(DEBUG) {console.log("Slope == 0");}
-    pointArray[0] = createGradientPoint(startPoint, endPoint);
-    for(i=1; i<20; i++)
-    {
-      pointArray[i] = createGradientPoint(pointArray[i-1], endPoint);
-    }
+    console.log("Unable to make Gradient");
   }
+  pointArray = assignColors(pointArray, startPoint.color, endPoint.color);
+
   return pointArray;
 }
 
 /*
 
-Create Gradient Point Function
+Assigns colors to each point
 
 */
-p5.prototype.createGradientPoint = function(startPoint, endPoint)
+p5.prototype.assignColors = function(pointArray, startColor, endColor)
 {
-  let sx = startPoint.x;
-  let sy = startPoint.y;
+  var arrayToReturn = pointArray;
 
-  let ex = endPoint.x;
-  let ey = endPoint.y;
 
-  //HERE LIES THE PROBLEM
-  //let delta = (ex-ey)/1000;
 
-  let midX = lerp(sx, ex, .1);
-  let midY = lerp(sy, ey, .1);
-  var tempPoint = new point(midX, midY, 255);
-
-  return tempPoint;
+  return(arrayToReturn);
 }
 
 /*

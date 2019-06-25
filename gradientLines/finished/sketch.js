@@ -1,5 +1,6 @@
-let DOT_SIZE = 15;
+let DOT_SIZE = 20;
 let DEBUG = true;
+let GRADIENT_FINENESS = 1000;
 
 var dotA, dotB, dotC;
 var lineD, lineE;
@@ -14,9 +15,14 @@ function setup()
   dotC = new point(600, 400, color('#ffd3b6'));
   dotD = new point(600, 600, color('#ffaaa5'));
 
-  line1 = new fancyLine(dotA, dotB, true);
-  line2 = new fancyLine(dotA, dotC, true);
-  line3 = new fancyLine(dotA, dotD, true);
+  line1 = new fancyLine(dotA, dotB);
+  line2 = new fancyLine(dotA, dotC);
+  line3 = new fancyLine(dotA, dotD);
+
+  line1.enableGradient();
+  line2.enableGradient();
+  line3.enableGradient();
+
 }
 
 function draw()
