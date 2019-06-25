@@ -5,17 +5,6 @@ Version 0.1 | June 21th, 2019
 
 */
 console.log("p5.utils -- loaded");
-var DEBUG;
-
-//Setup library
-p5.prototype.startUrEngines = function(d)
-{
-  DEBUG = d;
-  if(DEBUG)
-  {
-    console.log("p5.utils -- debug enabled");
-  }
-}
 
 //Objects
 
@@ -120,7 +109,7 @@ p5.prototype.fancyLine = class
       {
         this.gradientLines[i].show();
       }
-    }    
+    }
   }
 }
 

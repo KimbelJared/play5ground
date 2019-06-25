@@ -1,11 +1,11 @@
-let DOT_SIZE = 20;
+let DOT_SIZE = 15;
+let DEBUG = true;
 
 var dotA, dotB, dotC;
 var lineD, lineE;
 
 function setup()
 {
-  startUrEngines(true);
 
   var canvas = createCanvas(800, 800);
 
