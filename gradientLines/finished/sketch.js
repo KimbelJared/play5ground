@@ -1,6 +1,6 @@
 let DOT_SIZE = 20;
-let DEBUG = true;
-let GRADIENT_FINENESS = 1000;
+let DEBUG = TRUE;
+let GRADIENT_FINENESS = 100;
 
 var dotA, dotB, dotC;
 var lineD, lineE;
@@ -18,11 +18,6 @@ function setup()
   line1 = new fancyLine(dotA, dotB);
   line2 = new fancyLine(dotA, dotC);
   line3 = new fancyLine(dotA, dotD);
-
-  line1.enableGradient();
-  line2.enableGradient();
-  line3.enableGradient();
-
 }
 
 function draw()
@@ -37,4 +32,6 @@ function draw()
   line1.show();
   line2.show();
   line3.show();
+
+  line1.gradientObj.pointArray[5].show();
 }

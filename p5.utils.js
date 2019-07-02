@@ -4,8 +4,33 @@ Jared Kimbel | Jaredkimbel.com
 Version 0.1 | June 21th, 2019
 
 */
-console.log("p5.utils -- loaded");
+let TRUE = true;
+let FALSE = false;
+//Initial Function
+p5.prototype.startTheEngine = function()
+{
+  console.log("p5.utils -- loaded");
 
+  var valuesArray = [];
+  for (let x = 0; x < 3; x++)
+  {
+    valuesArray[x] = [];
+  }
+
+  valuesArray[0][0] = "DEBUG";
+  valuesArray[0][1] = DEBUG;
+  valuesArray[1][0] = "DOT_SIZE";
+  valuesArray[1][1] = DOT_SIZE;
+  valuesArray[2][0] = "GRADIENT_FINENESS";
+  valuesArray[2][1] = GRADIENT_FINENESS;
+
+  if(DEBUG)
+  { console.log("p5.utils -- debug enabled"); console.log("p5.utils -- constants"); + console.log(valuesArray);}
+  else {console.log("p5.utils -- debug not enabled. Add 'let DEBUG = true' at the top of sketch.js to do so");}
+
+
+}
+p5.prototype.registerMethod('init', p5.prototype.startTheEngine);
 //Objects
 
 /*
@@ -26,6 +51,8 @@ p5.prototype.point = class
       } else {
         this.color = color;
       }
+
+      this.test();
   }
   //Make sure point is in bounds
   test()
@@ -54,8 +81,6 @@ p5.prototype.point = class
   {
       push();
 
-      this.test();
-
       colorMode(RGB, 255)
       fill(this.color);
       noStroke();
@@ -74,11 +99,15 @@ Line Object
 p5.prototype.fancyLine = class
 {
   //Create all variables that the line will need
-  constructor(point1, point2, gradient)
+  constructor(point1, point2)
   {
       this.p1 = point1;
       this.p2 = point2;
-      this.gradient = false;
+
+      this.gradientObj;
+
+      this.enableGradient();
+      console.log(this.gradientObj);
 
       this.slope = findSlope(this.p1, this.p2);
       if(DEBUG) {console.log("Slope: "+this.slope);}
@@ -86,25 +115,15 @@ p5.prototype.fancyLine = class
 
   show()
   {
-    if(this.gradient)
-    {
-      for(let i = 0; i < this.gradientLines.length; i++)
-      {
-        this.gradientLines[i].show();
-      }
-    } else
-    {
-      line(this.p1.x, this.p1.y, this.p2.x, this.p2.y);
-    }
+    this.gradientObj.show();
   }
 
   enableGradient()
   {
-    this.gradient = !this.gradient
-    if(this.gradient && this.p1.color != this.p2.color)
+    if(this.p1.color != this.p2.color)
     {
       if(DEBUG) {console.log("Colors are different, preparing gradient.");}
-      this.gradientLines = createGradient(this.p1, this.p2, this.slope);
+      this.gradientObj = new gradient(this.p1, this.p2);
     } else if (this.color1 == this.color2)
     {
       if(DEBUG) {console.log("Colors are the same, no need for gradient.");}
@@ -114,32 +133,43 @@ p5.prototype.fancyLine = class
     }
   }
 }
-
 /*
 
-Line Segment Object (for Gradient)
+Gradient Object
 
 */
-p5.prototype.fancyLineSegment = class
+p5.prototype.gradient = class
 {
-  //Create all variables that the line will need
-  constructor(point1, point2, color)
+  constructor(startPoint, endPoint)
   {
-    this.x1 = point1.x;
-    this.y1 = point1.y;
+    this.pointArray = [];
+    this.lineArray = [];
+    this.pointArray[0] = startPoint;
 
-    this.x2 = point2.x;
-    this.y2 = point2.y;
+    this.gradientRecursiveTool(this.pointArray[0], endPoint, 0);
+  }
 
-    this.color = point1.color;
+  gradientRecursiveTool(onePoint, twoPoint, i)
+  {
+    if(i < GRADIENT_FINENESS)
+    {
+      i++;
+      this.pointArray[i] = findMidpoint(onePoint, twoPoint);
+      this.gradientRecursiveTool(onePoint, this.pointArray[i], i);
+      this.gradientRecursiveTool(this.pointArray[i], twoPoint, i);
+    }
+    else
+    {
+      return;
+    }
   }
 
   show()
   {
-    push();
-    stroke(this.color)
-    line(this.x1,this.y1,this.x2,this.y2);
-    pop();
+    for(let i = 0; i < this.pointArray.length; i++)
+    {
+      this.pointArray[i].show();
+    }
   }
 }
 
@@ -164,86 +194,38 @@ p5.prototype.findSlope = function(point1, point2)
 
 /*
 
-Create Gradient Function
+Midpoint Function
 
 */
-p5.prototype.createGradient = function(startPoint, endPoint, slope)
+p5.prototype.findMidpoint = function(point1, point2)
 {
-  var lineArray = [];
-  var pointArray = [];
+  let x1 = point1.x;
+  let y1 = point1.y;
 
-  var tempX = startPoint.x;
-  var tempY = startPoint.y;
+  let x2 = point2.x;
+  let y2 = point2.y;
 
-  if(slope < 0)
-  {
-    if(DEBUG) {console.log("Slope < 0");}
+  let newX = lerp(x1, x2, .5);
+  let newY = lerp(y1, y2, .5);
+  let newColor = lerpColor(point1.color, point2.color);
 
-    let deltaX = (endPoint.x-startPoint.x)/GRADIENT_FINENESS;
-    let deltaY = (startPoint.y-endPoint.y)/GRADIENT_FINENESS;
-
-    for(let i = 0; i < GRADIENT_FINENESS; i++)
-    {
-      pointArray[i] = new point(tempX+deltaX, tempY+deltaY);
-      tempX += deltaX;
-      tempY -= deltaY;
-    }
-
-  } else if (slope > 0)
-  {
-    if(DEBUG) {console.log("Slope > 0");}
-
-    let deltaX = (endPoint.x-startPoint.x)/GRADIENT_FINENESS;
-    let deltaY = (endPoint.y-startPoint.y)/GRADIENT_FINENESS;
-
-    for(let i = 0; i < GRADIENT_FINENESS; i++)
-    {
-      pointArray[i] = new point(tempX+deltaX, tempY+deltaY);
-      tempX += deltaX;
-      tempY += deltaY;
-    }
-  } else if (slope == 0)
-  {
-    if(DEBUG) {console.log("Slope == 0");}
-
-    let deltaX = (endPoint.x-startPoint.x)/GRADIENT_FINENESS;
-
-    for(let i = 0; i < GRADIENT_FINENESS; i++)
-    {
-      pointArray[i] = new point(tempX+deltaX, tempY);
-      tempX += deltaX;
-    }
-  } else
-  {
-    console.log("Unable to make Gradient");
-  }
-  pointArray = assignColors(pointArray, startPoint.color, endPoint.color);
-
-  return pointArray;
+  return new point(newX, newY, newColor)
 }
 
 /*
 
-Assigns colors to each point
+Lerp Color Function
 
 */
-p5.prototype.assignColors = function(pointArray, startColor, endColor)
+p5.prototype.lerpColor = function(color1, color2)
 {
-  var arrayToReturn = pointArray;
+  let color1Values = color1.toString();
+  let color2Values = color2.toString();
 
+  let newR = (int(color1Values[0])-int(color2Values[0]))/2;
+  let newG = (int(color1Values[1])-int(color2Values[1]))/2;
+  let newB = (int(color1Values[2])-int(color2Values[2]))/2;
+  let newA = (int(color1Values[3])-int(color2Values[3]))/2;
 
-
-  return(arrayToReturn);
-}
-
-/*
-
-Create Gradient Line Segments Function
-
-*/
-p5.prototype.createGradientLineSegments = function(pointsArray)
-{
-  var arrayToReturn = [];
-
-  return(arrayToReturn);
+  return color(newR, newG, newB, newA);
 }
