@@ -1,6 +1,6 @@
 let DOT_SIZE = 20;
 let DEBUG = TRUE;
-let GRADIENT_FINENESS = 2;
+let GRADIENT_FINENESS = 5;
 
 var dotA, dotB, dotC;
 var lineD, lineE;
