@@ -219,13 +219,17 @@ Lerp Color Function
 */
 p5.prototype.lerpColor = function(color1, color2)
 {
-  let color1Values = color1.toString();
-  let color2Values = color2.toString();
+  let color1Values = color1.toString('#rrggbb');
+  let color2Values = color2.toString('#rrggbb');
 
-  let newR = (int(color1Values[0])-int(color2Values[0]))/2;
-  let newG = (int(color1Values[1])-int(color2Values[1]))/2;
-  let newB = (int(color1Values[2])-int(color2Values[2]))/2;
-  let newA = (int(color1Values[3])-int(color2Values[3]))/2;
 
-  return color(newR, newG, newB, newA);
+
+  let newR = (parseInt('0x'+color1Values[1]+color1Values[2])+parseInt('0x'+color2Values[1]+color2Values[2]))/2;
+  let newG = (parseInt('0x'+color1Values[3]+color1Values[4])+parseInt('0x'+color2Values[3]+color2Values[4]))/2;
+  let newB = (parseInt('0x'+color1Values[5]+color1Values[6])+parseInt('0x'+color2Values[5]+color2Values[6]))/2;
+
+  let newColor = color(newR, newG, newB);
+
+  if(DEBUG) {console.log("color1: "+color1.toString('rgb')); console.log("color2: "+color2.toString('rgb')); console.log("color3: "+newColor.toString('rgb'));}
+  return newColor;
 }

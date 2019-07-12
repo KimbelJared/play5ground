@@ -1,6 +1,6 @@
 let DOT_SIZE = 20;
 let DEBUG = TRUE;
-let GRADIENT_FINENESS = 100;
+let GRADIENT_FINENESS = 2;
 
 var dotA, dotB, dotC;
 var lineD, lineE;
@@ -33,5 +33,4 @@ function draw()
   line2.show();
   line3.show();
 
-  line1.gradientObj.pointArray[5].show();
 }
