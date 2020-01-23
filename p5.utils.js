@@ -152,7 +152,7 @@ p5.prototype.gradient = class
   //LAST PROBLEMO
   gradientRecursiveTool(onePoint, twoPoint, i)
   {
-    if(tsti < GRADIENT_FINENESS)
+    if(i < GRADIENT_FINENESS)
     {
       console.log("i val : "+ i);
       this.pointArray[i] = findMidpoint(onePoint, twoPoint);
@@ -162,7 +162,7 @@ p5.prototype.gradient = class
       this.gradientRecursiveTool(this.pointArray[i], twoPoint, ri);
       console.log("right point");
 
-      tsti = (li+ri)/2;
+      i = (li+ri)/2;
     }
     else
     {
