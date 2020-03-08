@@ -33,7 +33,7 @@ entity = class {
     this.id = entity.count++;
 
     this.checkLocation();
-    this.point = new point(this.x, this.y);
+    this.point = new fancyPoint(this.x, this.y);
     this.canMove = false;
     this.movementSpeed = 0;
   }
@@ -66,12 +66,6 @@ entity = class {
       this.y = 0;
       if(DEBUG_game){console.log("Y of entity " + this.id + " positions it offscreen, setting to 0.")}
     }
-    this.checkCollision();
-  }
-
-  //Check collision
-  checkCollision(){
-    
   }
 
   //Updates location
@@ -84,6 +78,10 @@ entity = class {
     this.point.show();
   }
 
+  //Returns identification
+  papersPlease(){
+    return("entity");
+  }
 }
 //Static entity count
 entity.count = 0;
@@ -163,25 +161,65 @@ p5.prototype.playable = class{
     //Determine if we are moving
     if(this.goingUp){ //Going up
       this.e.y = this.e.y - this.e.movementSpeed;
+      let invalid = this.checkCollision(0);
+      if(invalid != -1){
+        this.e.y =  invalid;
+        this.goingUp = false;
+      }
     }
     if(this.goingDown){ //Going up
       this.e.y = this.e.y + this.e.movementSpeed;
+      let invalid = this.checkCollision(0);
+      if(invalid != -1){
+        this.e.y =  invalid;
+        this.goingDown = false;
+      }
     }
     if(this.goingLeft){ //Going up
       this.e.x = this.e.x - this.e.movementSpeed;
+      let invalid = this.checkCollision(1);
+      if(invalid != -1){
+        this.e.x =  invalid;
+        this.goingLeft = false;
+      }
     }
     if(this.goingRight){ //Going up
       this.e.x = this.e.x + this.e.movementSpeed;
+      let invalid = this.checkCollision(1);
+      if(invalid != -1){
+        this.e.x =  invalid;
+        this.goingRight = false;
+      }
     }
     this.e.move();
   }
 
+  //Checks collision with all collidables
+  checkCollision(which){
+    for(var i = 0; i < collidables.length; i++){
+      if(collidables[i].papersPlease() == "wall"){ //Check collision with wall
+        let v = collidables[i].isIn(this.e.point);
+        console.log(v);
+        if(v[0] && (which == 0)){
+          return v[1];
+        }
+        if(v[0] && (which == 1)){
+          return v[2];
+        }
+      }
+    }
+    return -1;
+  }
+  //Returns identification
+  papersPlease(){
+    return("playable");
+  }
   //Debug movement function
   movementStatus(){
-    console.log("GoingUP " + this.goingUp);
-    console.log("GoingDown " + this.goingDown);
-    console.log("GoingLeft " + this.goingLeft);
-    console.log("GoingRight " + this.goingRight);
+    console.log(this.e.id + " GoingUP " + this.goingUp);
+    console.log(this.e.id + " GoingDown " + this.goingDown);
+    console.log(this.e.id + " GoingLeft " + this.goingLeft);
+    console.log(this.e.id + " GoingRight " + this.goingRight);
   }
 
   //Debug location function
@@ -192,7 +230,42 @@ p5.prototype.playable = class{
 
 //Fixed entity class
 p5.prototype.wall = class{
+  //Setup wall
+  constructor(p1, p2, p3, p4, color){
+    this.id = entity.count++;
+    this.rect = new fancyRect(p1, p2, p3, p4, color);
+    this.collidesWithPlayables = true;
+    this.region = new region(this.rect, 0);
+  }
 
-  constructor(p1, p2, p3, p4){
+  //Sets if wall can be ollided with
+  setCollision(bool){
+    this.collidesWithPlayables = bool;
+  }
+
+  isIn(checkPoint){
+    return this.region.isIn(checkPoint);
+  }
+  //Display wall
+  show(){
+    this.rect.show();
+  }
+
+  //Returns identification
+  papersPlease(){
+    return("wall");
+  }
+}
+
+region = class{
+  //Setup region
+  constructor(object, objectType){
+    this.object = object;
+    this.objectType = objectType;
+  }
+
+  //Calls object isIn function
+  isIn(checkPoint){
+    return this.object.isIn(checkPoint);
   }
 }

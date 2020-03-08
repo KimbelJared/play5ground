@@ -1,4 +1,4 @@
-let e1, e2;
+
 let playables = [];
 let collidables = [];
 function setup(){
@@ -9,30 +9,39 @@ function setup(){
   gameDebug(1);
   utilsDebug(1);
 
-  collidables[0] = new entity(width/4, height/4);
-  collidables[1] = new entity(3*width/4, 3*height/4);
   playables[0] = new playable(width/4, height/2);
   playables[1] = new playable(3*width/4, height/2);
   playables[1].setMovementKeys([73, 75, 74, 76]);
+
+  p1 = new fancyPoint(350, 350);
+  p2 = new fancyPoint(450, 350);
+  p3 = new fancyPoint(450, 450);
+  p4 = new fancyPoint(350, 450);
+
+  collidables[0] = new wall(p1, p2, p3, p4, 'red');
 }
 
 function draw(){
   background(51);
 
-  collidables[0].show();
-  collidables[1].show();
-  playables[0].move();
-  playables[0].show();
-  playables[1].move();
-  playables[1].show();
+  for(var i = 0; i < collidables.length; i++){
+    collidables[i].show();
+  }
+
+  for(var i = 0; i < playables.length; i++){
+    playables[i].move();
+    playables[i].show();
+  }
 }
 
 function keyPressed(){
-  playables[0].movement(keyCode, true);
-  playables[1].movement(keyCode, true);
+  for(var i = 0; i < playables.length; i++){
+    playables[i].movement(keyCode, true);
+  }
 }
 
 function keyReleased(){
-  playables[0].movement(keyCode, false);
-  playables[1].movement(keyCode, false);
+  for(var i = 0; i < playables.length; i++){
+    playables[i].movement(keyCode, false);
+  }
 }
