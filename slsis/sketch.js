@@ -1,7 +1,11 @@
-let shark, ui;
+let shark, ui, font;
 let baddies = [];
 let entity_count = 0;
 let DEBUG = true;
+
+function preload() {
+  //font = loadFont('https://kimbeljared.github.io/slsis/data/spaceFont.vlw');
+}
 
 function setup(){
   frameRate(60);

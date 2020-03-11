@@ -5,7 +5,7 @@ laser = class{
     this.id = entity_count++;
 
     this.image = 0;
-    this.movementSpeed = 10;
+    this.movementSpeed = 20;
 
     this.xMax = width;
     this.display = true;
