@@ -172,40 +172,4 @@ p5.prototype.fancyRect = class{
       pop();
     }
   }
-
-  isIn(checkPoint){
-    let insideX;
-    let insideY;
-    let newX;
-    let newY;
-    console.log("Objects x: " + this.points[0].x + " Objects y: " + this.points[0].y);
-    console.log("Check Point x: " + checkPoint.x + "Check Point y: " + checkPoint.y)
-    if((this.points[0].x < checkPoint.x) && (checkPoint.x < this.points[1].x)){ //x is inside
-      insideX = true;
-    } else {
-      insideX = false;
-    }
-    if((this.points[0].y < checkPoint.y) && (checkPoint.y < this.points[3].y)){ //y is inside
-      insideY = true;
-    } else {
-      insideY = false;
-    }
-    if(insideX){ //TODO
-      let midpoint = ((this.points[1].x - this.points[0].x)/2)+this.points[0].x;
-      if(checkPoint.x <= midpoint){ //left of mid
-        newX = this.points[0].x;
-      } else if(midpoint < checkPoint.x){ //Right of mid
-        newX = this.points[1].x;
-      }
-    }
-    if(insideY){ //TODO
-      let midpoint = ((this.points[3].y - this.points[0].y)/2)+this.points[0].y;
-      if(checkPoint.y <= midpoint){ //Above mid
-        newY = this.points[0].y;
-      } else if(midpoint < checkPoint.y){ //Below mid
-        newY = this.points[3].y;
-      }
-    }
-    return [insideX && insideY, newX, newY];
-  }
 }
