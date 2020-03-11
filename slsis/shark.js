@@ -9,7 +9,8 @@ shark = class{
     this.health = 5;
 
     this.isSprinting = false;
-    this.sprintDistance = 120;
+    this.sprintDistanceMax = 120;
+    this.sprintDistance = this.sprintDistanceMax;
     this.movementSpeed = 5;
     this.xMin = 0;
     this.xMax = width/3;
@@ -82,6 +83,12 @@ shark = class{
         if(keyCode == 32){
           this.isShooting = true;
         }
+        if(keyCode == 16){
+          if(this.sprintDistance > 0){
+            this.isSprinting = true;
+            this.movementSpeed = 10;
+          }
+        }
       } else{ //key released, stop movement
         //determine what key
         if(keyCode == this.upKey){ //Going up
@@ -107,6 +114,10 @@ shark = class{
         if(keyCode == 32){
           this.isShooting = false;
         }
+        if(keyCode == 16){
+          this.isSprinting = false;
+          this.movementSpeed = 5;
+        }
       }
   }
 
@@ -125,6 +136,20 @@ shark = class{
       this.x = this.x + this.movementSpeed;
     }
     this.checkLocation();
+
+    if(int(this.sprintDistance) == 0){
+      this.isSprinting = false;
+      this.movementSpeed = 5;
+    }
+
+    if(this.isSprinting){
+      this.sprintDistance--;
+    } else {
+      this.sprintDistance +=  .5;
+      if(this.sprintDistance >= this.sprintDistanceMax){
+        this.sprintDistance = this.sprintDistanceMax;
+      }
+    }
 
     for (var i = 0; i < this.lasers.length; i++) {
       if(this.lasers[i].display){

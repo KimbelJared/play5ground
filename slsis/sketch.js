@@ -4,6 +4,7 @@ let entity_count = 0;
 let DEBUG = true;
 
 function setup(){
+  frameRate(60);
   var canvas = createCanvas(1600, 800);
   shark = new shark;
   ui = new interface;
