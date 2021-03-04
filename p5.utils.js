@@ -80,6 +80,7 @@ p5.prototype.fancyPoint = class{
       pop();
   }
 
+  //Move the point to a new location
   move(newX, newY){
     this.x = newX;
     this.y = newY;
