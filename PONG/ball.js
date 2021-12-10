@@ -3,8 +3,8 @@ function ball() {
   this.size = 25
   this.x = width/2;
   this.y = height/2;
-  this.xVelocity = 0;
-  this.yVelocity = 0;
+  this.xVelocity = 1;
+  this.yVelocity = 1;
 
 
   this.show = function() {
@@ -15,27 +15,33 @@ function ball() {
     ellipse(this.x, this.y, this.size);
     pop();
   }
+
   this.check = function() {
     if(this.x > width) {
-      this.xVelocity = -1;
+      this.xVelocity *= -1;
       this.x = width;
     } else if (this.x < 0) {
-      this.xVelocity = 1;
+      this.xVelocity *= -1;
       this.x = 0;
     }
 
     if(this.y > height) {
-      this.yVelocity = -1;
-      this.x = height;
+      this.yVelocity *= -1;
+      this.y = height;
     } else if (this.y < 0) {
-      this.xyVelocity = 1;
+      this.yVelocity *= -1;
       this.y = 0;
     }
 
   }
+
   this.update = function() {
     this.check();
     this.x = this.x + this.xVelocity;
-    this.y = this.y + this.yVecocity;
+    this.y = this.y + this.yVelocity;
+  }
+
+  this.log = function() {
+    console.log("x: " + this.x + " y: " + this.y);
   }
 }
